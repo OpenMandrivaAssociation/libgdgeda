@@ -14,6 +14,7 @@ Source:		%{name}-%{version}.tar.bz2
 Url:		http://www.geda.seul.org
 License:	LGPL 
 Group: 		Sciences/Other
+BuildRoot:    	%{_tmppath}/%{name}-buildroot
 BuildRequires:  zlib >= 1.1
 BuildRequires:  libpng >= 1.0
 
