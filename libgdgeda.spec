@@ -66,8 +66,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %multiarch_binaries %{buildroot}%{_bindir}/libgdgeda-config
 
+%if %mdkversion < 200900
 %post -n %libname -p /sbin/ldconfig
+%endif
+%if %mdkversion < 200900
 %postun -n %libname -p /sbin/ldconfig
+%endif
 
 %clean
 rm -Rf $RPM_BUILD_ROOT
