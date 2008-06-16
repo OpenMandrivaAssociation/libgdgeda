@@ -1,7 +1,7 @@
 %define fname gdgeda
 %define name lib%{fname}
 %define version 2.0.15
-%define release %mkrel 5
+%define release %mkrel 6
 
 %define major 6
 %define libname %mklibname %fname %major
