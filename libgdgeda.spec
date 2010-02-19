@@ -16,8 +16,8 @@ Url:		http://www.geda.seul.org
 License:	LGPL 
 Group: 		Sciences/Other
 BuildRoot:    	%{_tmppath}/%{name}-buildroot
-BuildRequires:  zlib >= 1.1
-BuildRequires:  libpng >= 1.0
+BuildRequires:  zlib-devel >= 1.1
+BuildRequires:  png-devel >= 1.0
 
 %description
 Libgdgeda is a hack on libgd, which is a graphics library.  It allows your
@@ -81,7 +81,7 @@ rm -Rf $RPM_BUILD_ROOT
 %{_libdir}/libgdgeda.so.%major
 %{_libdir}/libgdgeda.so.%{major}.0.0
 
-%files -n %libname-devel
+%files -n %develname
 %defattr(-,root,root)
 %_bindir/*
 %{_libdir}/pkgconfig/%{name}.pc
