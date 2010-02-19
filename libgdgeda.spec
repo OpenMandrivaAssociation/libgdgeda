@@ -5,6 +5,7 @@
 
 %define major 6
 %define libname %mklibname %fname %major
+%define develname %mklibname -d %fname
 
 Summary: 	Graphical libraries for the gEDA project
 Name: 		%{name}
@@ -36,14 +37,14 @@ code to quickly draw images complete with lines, arcs, text, multiple
 colors, cut and paste from other images, and flood fills, and write out
 the result as a .PNG file.
 
-%package -n %libname-devel
+%package -n %develname
 Summary:	Graphical development libraries for the gEDA project
 Group:		Development/C
-Obsoletes: libgdgeda-devel
-Provides: libgdgeda-devel = %version-%release
+Provides: %{name}-devel = %version-%release
 Requires: %libname = %version
+Obsoletes: %{_lib}gdgeda6-devel < %version-%release
 
-%description -n %libname-devel
+%description -n %develname
 This package contains libgdgeda header files that are needed for
 development.
 Libgdgeda is a hack on libgd, which is a graphics library. It allows your
@@ -52,17 +53,15 @@ colors, cut and paste from other images, and flood fills, and write out
 the result as a .PNG file.
 
 %prep
-rm -rf $RPM_BUILD_ROOT
-
 %setup -q
 
 %build
-%configure
+%configure2_5x
 %make
 
 %install
-%makeinstall
-./libtool --finish $RPM_BUILD_ROOT/%{_libdir}
+rm -fr %buildroot
+%makeinstall_std
 
 %multiarch_binaries %{buildroot}%{_bindir}/libgdgeda-config
 
@@ -92,5 +91,3 @@ rm -Rf $RPM_BUILD_ROOT
 %{_libdir}/libgdgeda.la
 %dir %{_includedir}/gdgeda
 %{_includedir}/gdgeda/*
-
-
