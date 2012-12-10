@@ -1,23 +1,19 @@
 %define fname gdgeda
-%define name lib%{fname}
-%define version 2.0.15
-%define release %mkrel 9
 
 %define major 6
-%define libname %mklibname %fname %major
-%define develname %mklibname -d %fname
+%define libname %mklibname %{fname} %{major}
+%define develname %mklibname -d %{fname}
 
-Summary: 	Graphical libraries for the gEDA project
-Name: 		%{name}
-Version: 	%{version}
-Release: 	%{release}
-Source:		%{name}-%{version}.tar.bz2
-Url:		http://www.geda.seul.org
+Summary:	Graphical libraries for the gEDA project
+Name:		lib%{fname}
+Version:	2.0.15
+Release:	10
+Group:		Sciences/Other
 License:	LGPL 
-Group: 		Sciences/Other
-BuildRoot:    	%{_tmppath}/%{name}-buildroot
-BuildRequires:  zlib-devel >= 1.1
-BuildRequires:  png-devel >= 1.0
+Url:		http://www.geda.seul.org
+Source:		%{name}-%{version}.tar.bz2
+BuildRequires:	pkgconfig(zlib)
+BuildRequires:  pkgconfig(libpng)
 
 %description
 Libgdgeda is a hack on libgd, which is a graphics library.  It allows your
@@ -25,26 +21,23 @@ code to quickly draw images complete with lines, arcs, text, multiple
 colors, cut and paste from other images, and flood fills, and write out
 the result as a .PNG file.
 
-%package -n %libname
-Summary:        Graphical libraries for the gEDA project
-Group:          Sciences/Other
-Obsoletes:	libgdgeda
-Provides: 	libgdgeda = %version-%release
+%package -n %{libname}
+Summary:	Graphical libraries for the gEDA project
+Group:		Sciences/Other
 
-%description -n %libname
+%description -n %{libname}
 Libgdgeda is a hack on libgd, which is a graphics library.  It allows your
 code to quickly draw images complete with lines, arcs, text, multiple
 colors, cut and paste from other images, and flood fills, and write out
 the result as a .PNG file.
 
-%package -n %develname
+%package -n %{develname}
 Summary:	Graphical development libraries for the gEDA project
 Group:		Development/C
-Provides: %{name}-devel = %version-%release
-Requires: %libname = %version
-Obsoletes: %{_lib}gdgeda6-devel < %version-%release
+Provides:	%{name}-devel = %{version}-%{release}
+Requires:	%{libname} = %{version}-%{release}
 
-%description -n %develname
+%description -n %{develname}
 This package contains libgdgeda header files that are needed for
 development.
 Libgdgeda is a hack on libgd, which is a graphics library. It allows your
@@ -60,34 +53,18 @@ the result as a .PNG file.
 %make
 
 %install
-rm -fr %buildroot
 %makeinstall_std
 
 %multiarch_binaries %{buildroot}%{_bindir}/libgdgeda-config
 
-%if %mdkversion < 200900
-%post -n %libname -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %libname -p /sbin/ldconfig
-%endif
+%files -n %{libname}
+%{_libdir}/libgdgeda.so.%{major}*
 
-%clean
-rm -Rf $RPM_BUILD_ROOT
-
-%files -n %libname
-%defattr(-,root,root)
-%doc COPYING README.1ST README.TXT
-%{_libdir}/libgdgeda.so.%major
-%{_libdir}/libgdgeda.so.%{major}.0.0
-
-%files -n %develname
-%defattr(-,root,root)
-%_bindir/*
+%files -n %{develname}
+%{_bindir}/libgdgeda-config
 %{_libdir}/pkgconfig/%{name}.pc
-%multiarch %{multiarch_bindir}/*-config
+%{multiarch_bindir}/libgdgeda-config
 %{_libdir}/libgdgeda.so
 %{_libdir}/libgdgeda.a
-%{_libdir}/libgdgeda.la
-%dir %{_includedir}/gdgeda
-%{_includedir}/gdgeda/*
+%{_includedir}/gdgeda
+
