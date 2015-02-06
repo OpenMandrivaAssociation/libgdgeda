@@ -7,7 +7,7 @@
 Summary:	Graphical libraries for the gEDA project
 Name:		lib%{fname}
 Version:	2.0.15
-Release:	10
+Release:	11
 Group:		Sciences/Other
 License:	LGPL 
 Url:		http://www.geda.seul.org
