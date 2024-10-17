@@ -10,7 +10,7 @@ Version:	2.0.15
 Release:	11
 Group:		Sciences/Other
 License:	LGPL 
-Url:		http://www.geda.seul.org
+Url:		https://www.geda.seul.org
 Source:		%{name}-%{version}.tar.bz2
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:  pkgconfig(libpng)
