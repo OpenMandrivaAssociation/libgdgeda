@@ -12,6 +12,11 @@ Group:		Sciences/Other
 License:	LGPL 
 Url:		https://www.geda.seul.org
 Source:		%{name}-%{version}.tar.bz2
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:  pkgconfig(libpng)
 
